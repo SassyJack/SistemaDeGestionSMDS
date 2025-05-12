@@ -1,20 +1,12 @@
 services:
   - type: web
     name: laravel-app
-    env: php
+    env: docker
     plan: free
-    buildCommand: |
-      cd public_html
-      composer install --no-dev --optimize-autoloader
-      npm install
-      npm run build
-      php artisan config:cache
-      php artisan route:cache
-      php artisan view:cache
-      php artisan migrate --force
-    startCommand: |
-      cd public_html
-      php artisan serve --host 0.0.0.0 --port 10000
+    repo: https://github.com/SassyJack/SistemaDeGestionSMDS
+    branch: main
+    dockerfilePath: Dockerfile
+    healthCheckPath: /
     envVars:
       - key: APP_NAME
         value: Laravel
@@ -50,30 +42,5 @@ services:
       - key: QUEUE_CONNECTION
         value: sync
 
-      - key: REDIS_CLIENT
-        value: phpredis
-      - key: REDIS_HOST
-        value: 127.0.0.1
-      - key: REDIS_PORT
-        value: 6379
-      - key: REDIS_PASSWORD
-        value: null
-
-      - key: MAIL_MAILER
-        value: log
-      - key: MAIL_HOST
-        value: 127.0.0.1
-      - key: MAIL_PORT
-        value: 2525
-      - key: MAIL_FROM_ADDRESS
-        value: hello@example.com
-      - key: MAIL_FROM_NAME
-        value: Laravel
-
       - key: VITE_APP_NAME
         value: Laravel
-
-    buildFilter:
-      paths:
-        - public_html/**
-    staticPublishPath: public_html/public
