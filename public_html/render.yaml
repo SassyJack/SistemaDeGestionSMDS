@@ -1,23 +1,78 @@
 services:
   - type: web
     name: laravel-app
-    env: docker
+    env: php
     plan: free
-    autoDeploy: true
+    buildCommand: |
+      cd public_html
+      composer install --no-dev --optimize-autoloader
+      npm install
+      npm run build
+      php artisan config:cache
+      php artisan migrate --force
+    startCommand: |
+      cd public_html
+      php artisan serve --host 0.0.0.0 --port 10000
     envVars:
+      - key: APP_NAME
+        value: Laravel
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        sync: false # Render no genera APP_KEY automáticamente
+        value: 575baae3d1ea4f73aaf7d42d8b57df2e
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://sanmigueldesema.dcramirez.com
+
+      # PostgreSQL Render DB config
       - key: DB_CONNECTION
-        value: mysql
+        value: pgsql
       - key: DB_HOST
-        value: your-db-host
+        value: dpg-d0h55m0d13ps73cincd0-a
       - key: DB_PORT
-        value: 3306
+        value: 5432
       - key: DB_DATABASE
-        value: your-db-name
+        value: sdgsanmigueldesema
       - key: DB_USERNAME
-        value: your-db-user
+        value: sdgsanmigueldesema_user
       - key: DB_PASSWORD
-        value: your-db-password
+        value: LIlnbSPIgyPPTQpuLTXAgHWdqluMTnre
+
+      - key: SESSION_DRIVER
+        value: file
+      - key: SESSION_LIFETIME
+        value: 120
+
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+
+      - key: REDIS_CLIENT
+        value: phpredis
+      - key: REDIS_HOST
+        value: 127.0.0.1
+      - key: REDIS_PORT
+        value: 6379
+      - key: REDIS_PASSWORD
+        value: null
+
+      - key: MAIL_MAILER
+        value: log
+      - key: MAIL_HOST
+        value: 127.0.0.1
+      - key: MAIL_PORT
+        value: 2525
+      - key: MAIL_FROM_ADDRESS
+        value: hello@example.com
+      - key: MAIL_FROM_NAME
+        value: Laravel
+
+      - key: VITE_APP_NAME
+        value: Laravel
+
+    buildFilter:
+      paths:
+        - public_html/**
+    staticPublishPath: public_html/public
