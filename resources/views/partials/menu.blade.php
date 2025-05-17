@@ -1,6 +1,4 @@
-<!-- resources/views/partials/menu.blade.php -->
-
-<ul class="bg-gray-100 p-4 space-y-2 rounded-lg">
+<div class="nav flex-column">
     @php
         $menu = [
             'Contratistas' => [],
@@ -20,27 +18,52 @@
     @endphp
 
     @foreach ($menu as $item => $subItems)
-        <li class="border-b pb-2">
-            <details class="group">
-                <summary class="cursor-pointer font-semibold text-blue-700 hover:underline">
-                    {{ $item }}
-                </summary>
-                <ul class="pl-4 mt-2 space-y-1 text-sm text-gray-700">
-                    <li><a href="{{ url(strtolower(str_replace(' ', '_', $item)).'/create') }}" class="hover:text-blue-500">➕ Crear</a></li>
-                    <li><a href="{{ url(strtolower(str_replace(' ', '_', $item)).'/edit') }}" class="hover:text-blue-500">✏️ Editar</a></li>
-                    <li><a href="{{ url(strtolower(str_replace(' ', '_', $item))) }}" class="hover:text-blue-500">👁️ Visualizar</a></li>
+        <div class="nav-item mb-2">
+            <a class="nav-link" href="#{{ strtolower(str_replace(' ', '_', $item)) }}" 
+               data-bs-toggle="collapse" role="button">
+                <span class="me-2"></span>{{ $item }}
+            </a>
+            <div class="collapse" id="{{ strtolower(str_replace(' ', '_', $item)) }}">
+                <div class="nav flex-column ms-3">
+                    <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $item)).'/create') }}">
+                        ➕ Crear
+                    </a>
+                    <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $item)).'/edit') }}">
+                        ✏️ Editar
+                    </a>
+                    <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $item))) }}">
+                        👁️ Visualizar
+                    </a>
 
-                    @foreach ($subItems as $sub)
-                        <li class="mt-2 ml-4 font-medium text-gray-900">{{ $sub }}
-                            <ul class="pl-4 text-sm text-gray-700">
-                                <li><a href="{{ url(strtolower(str_replace(' ', '_', $sub)).'/create') }}" class="hover:text-blue-500">➕ Crear</a></li>
-                                <li><a href="{{ url(strtolower(str_replace(' ', '_', $sub)).'/edit') }}" class="hover:text-blue-500">✏️ Editar</a></li>
-                                <li><a href="{{ url(strtolower(str_replace(' ', '_', $sub))) }}" class="hover:text-blue-500">👁️ Visualizar</a></li>
-                            </ul>
-                        </li>
-                    @endforeach
-                </ul>
-            </details>
-        </li>
+                    @if(count($subItems) > 0)
+                        <div class="border-top my-2"></div>
+                        @foreach ($subItems as $sub)
+                            <div class="nav-item">
+                                <span class="nav-link fw-bold">{{ $sub }}</span>
+                                <div class="nav flex-column ms-3">
+                                    <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $sub)).'/create') }}">
+                                        ➕ Crear
+                                    </a>
+                                    <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $sub)).'/edit') }}">
+                                        ✏️ Editar
+                                    </a>
+                                    <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $sub))) }}">
+                                        👁️ Visualizar
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
     @endforeach
-</ul>
+
+    <div class="border-top my-3"></div>
+    <form action="{{ route('logout') }}" method="POST" class="px-3">
+        @csrf
+        <button type="submit" class="btn btn-outline-danger w-100">
+            🚪 Cerrar Sesión
+        </button>
+    </form>
+</div>
