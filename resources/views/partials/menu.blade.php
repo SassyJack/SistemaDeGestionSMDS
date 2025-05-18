@@ -3,7 +3,8 @@
         $menu = [
             'Contratistas' => [],
             'Contratos' => [],
-            'Entidades' => ['Entidades Tipos'],
+            'Entidades' => [],
+            'Entidades Tipos' => [],
             'Especialidades' => [],
             'Interventores' => [],
             'Metas' => [],
@@ -29,11 +30,8 @@
                     <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $item)).'/create') }}">
                         ➕ Crear
                     </a>
-                    <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $item)).'/edit') }}">
-                        ✏️ Editar
-                    </a>
                     <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $item))) }}">
-                        👁️ Visualizar
+                        ✏️ Listar/Editar
                     </a>
 
                     @if(count($subItems) > 0)
