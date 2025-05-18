@@ -63,6 +63,7 @@ return [
         'usuarios' => [
             'driver' => 'eloquent',
             'model' => App\Models\Usuario::class,
+            'password_name' => 'contrasena',
         ],
     ],
 

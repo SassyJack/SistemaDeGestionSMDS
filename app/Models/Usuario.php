@@ -11,7 +11,7 @@ class Usuario extends Authenticatable
     
     protected $fillable = [
         'nombre',
-        'contrasena',
+        'contrasena',  // Cambiado de 'password' a 'contrasena'
         'fecha_creacion',
         'id_estado'
     ];
