@@ -10,7 +10,7 @@
             'Proyectos' => [],
             'Roles' => [],
             'Rubros' => [],
-            'Tipos Rubros' => [],
+            'Tipo Rubros' => [],
             'Sectores' => [],
             'Seguimiento Proyectos' => [],
             'Usuarios' => ['Roles Usuarios'],
