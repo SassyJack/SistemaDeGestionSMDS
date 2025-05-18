@@ -18,13 +18,9 @@
             </div>
 
             <div class="flex justify-end space-x-4">
-                <a href="{{ route('tipo_rubros.index') }}" class="btn btn-secondary px-4 py-2 rounded-lg transition-all duration-300 hover:opacity-90">
-                    <i class="fas fa-times me-2"></i>Cancelar
-                </a>
-                <button type="submit" class="btn btn-primary px-4 py-2 rounded-lg transition-all duration-300 hover:opacity-90">
-                    <i class="fas fa-save me-2"></i>Guardar
-                </button>
-            </div>
+                <a href="{{ route('tipo_rubros.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Cancelar</a>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Guardar</button>
+            </div>
         </form>
     </div>
 </div>

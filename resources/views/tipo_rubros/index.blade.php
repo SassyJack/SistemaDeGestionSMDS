@@ -4,7 +4,9 @@
 <div class="container mx-auto px-4 py-8">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold">Tipos de Rubros</h2>
-        <a href="{{ route('tipo_rubros.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Nuevo Tipo de Rubro</a>
+        <a href="{{ route('tipo_rubros.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus-circle me-2"></i>Nuevo Tipo de Rubro
+        </a>
     </div>
 
     @if(session('success'))
@@ -36,4 +38,33 @@
         </table>
     </div>
 </div>
+
+<style>
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .btn-primary {
+        background: linear-gradient(145deg, #2563eb, #1d4ed8);
+        color: white !important;
+        box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 10px -1px rgba(37, 99, 235, 0.2), 0 4px 6px -1px rgba(37, 99, 235, 0.1);
+        background: linear-gradient(145deg, #1d4ed8, #1e40af);
+    }
+
+    .me-2 {
+        margin-right: 0.5rem;
+    }
+</style>
 @endsection
