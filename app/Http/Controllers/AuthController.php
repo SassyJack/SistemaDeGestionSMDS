@@ -22,7 +22,7 @@ class AuthController extends Controller
 
         if (Auth::attempt([
             'nombre' => $credentials['nombre'],
-            'contrasena' => $credentials['contrasena']
+            'password' => $credentials['contrasena']  // Cambia 'contrasena' a 'password' aquí
         ])) {
             $request->session()->regenerate();
             return redirect()->intended('dashboard');
