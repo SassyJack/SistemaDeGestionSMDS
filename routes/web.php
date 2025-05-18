@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\TipoRubroController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UsuarioController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,6 +37,12 @@ Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.crea
 Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
 Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit');
 Route::put('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
+//Usuarios
+Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
+Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
 
 
 
