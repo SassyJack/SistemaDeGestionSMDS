@@ -22,7 +22,7 @@ class TipoRubroController extends Controller
     {
         $request->validate([
             'nombre' => 'required|max:50',
-            'descripcion' => 'nullable'
+            'descripcion' => 'nullable|string'
         ]);
 
         TipoRubro::create($request->all());
@@ -38,7 +38,7 @@ class TipoRubroController extends Controller
     {
         $request->validate([
             'nombre' => 'required|max:50',
-            'descripcion' => 'nullable'
+            'descripcion' => 'nullable|string'
         ]);
 
         $tipoRubro->update($request->all());
