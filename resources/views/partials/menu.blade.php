@@ -33,26 +33,6 @@
                     <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $item))) }}">
                         ✏️ Listar/Editar
                     </a>
-
-                    @if(count($subItems) > 0)
-                        <div class="border-top my-2"></div>
-                        @foreach ($subItems as $sub)
-                            <div class="nav-item">
-                                <span class="nav-link fw-bold">{{ $sub }}</span>
-                                <div class="nav flex-column ms-3">
-                                    <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $sub)).'/create') }}">
-                                        ➕ Crear
-                                    </a>
-                                    <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $sub)).'/edit') }}">
-                                        ✏️ Editar
-                                    </a>
-                                    <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $sub))) }}">
-                                        👁️ Visualizar
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
                 </div>
             </div>
         </div>
