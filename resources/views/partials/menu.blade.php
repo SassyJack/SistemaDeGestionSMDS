@@ -14,8 +14,9 @@
             'Tipo Rubros' => [],
             'Sectores' => [],
             'Seguimiento Proyectos' => [],
-            'Usuarios' => ['Roles Usuarios'],
+            'Usuarios' => [],
             'Historial Cambios' => [],
+            'Formas de Pago' => [],
         ];
     @endphp
 
@@ -42,7 +43,7 @@
     <form action="{{ route('logout') }}" method="POST" class="px-3">
         @csrf
         <button type="submit" class="btn btn-outline-danger w-100">
-            🚪 Cerrar Sesión
+            Cerrar Sesión
         </button>
     </form>
 </div>
