@@ -6,6 +6,7 @@ use App\Http\Controllers\SectorController;
 use App\Http\Controllers\TipoRubroController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\EspecialidadController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -43,6 +44,12 @@ Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usua
 Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
 Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
 Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
+//Especialidades
+Route::get('/especialidades', [EspecialidadController::class, 'index'])->name('especialidades.index');
+Route::get('/especialidades/create', [EspecialidadController::class, 'create'])->name('especialidades.create');
+Route::post('/especialidades', [EspecialidadController::class, 'store'])->name('especialidades.store');
+Route::get('/especialidades/{especialidad}/edit', [EspecialidadController::class, 'edit'])->name('especialidades.edit');
+Route::put('/especialidades/{especialidad}', [EspecialidadController::class, 'update'])->name('especialidades.update');
 
 
 
