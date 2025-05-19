@@ -6,6 +6,7 @@ use App\Http\Controllers\SectorController;
 use App\Http\Controllers\TipoRubroController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\RubroController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -43,9 +44,12 @@ Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usua
 Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
 Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
 Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
-
-
-
+//Rubros
+Route::get('/rubros', [RubroController::class, 'index'])->name('rubros.index');
+Route::get('/rubros/create', [RubroController::class, 'create'])->name('rubros.create');
+Route::post('/rubros', [RubroController::class, 'store'])->name('rubros.store');
+Route::get('/rubros/{rubro}/edit', [RubroController::class, 'edit'])->name('rubros.edit');
+Route::put('/rubros/{rubro}', [RubroController::class, 'update'])->name('rubros.update');
 
 // Rutas protegidas
 Route::middleware(['auth'])->group(function () {
