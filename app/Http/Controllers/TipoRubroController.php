@@ -21,7 +21,7 @@ class TipoRubroController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|max:50',
+            'nombre' => 'required|max:200',
             'descripcion' => 'nullable|string'
         ]);
 
@@ -37,7 +37,7 @@ class TipoRubroController extends Controller
     public function update(Request $request, TipoRubro $tipoRubro)
     {
         $request->validate([
-            'nombre' => 'required|max:50',
+            'nombre' => 'required|max:200',
             'descripcion' => 'nullable|string'
         ]);
 

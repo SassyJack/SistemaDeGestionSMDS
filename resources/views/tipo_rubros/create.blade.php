@@ -9,12 +9,12 @@
             @csrf
             <div>
                 <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-                <input type="text" name="nombre" id="nombre" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+                <input type="text" name="nombre" id="nombre" class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
             </div>
 
             <div>
                 <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
-                <textarea name="descripcion" id="descripcion" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
+                <textarea name="descripcion" id="descripcion" rows="3" class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
             </div>
 
             <div class="flex justify-end space-x-4">
@@ -30,4 +30,5 @@
         </form>
     </div>
 </div>
+
 @endsection
