@@ -31,43 +31,4 @@
     </div>
 </div>
 
-<style>
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        font-weight: 500;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-        background: linear-gradient(145deg, #2563eb, #1d4ed8);
-        color: white;
-        box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
-    }
-
-    .btn-secondary {
-        background: linear-gradient(145deg, #64748b, #475569);
-        color: white;
-        box-shadow: 0 4px 6px -1px rgba(100, 116, 139, 0.1), 0 2px 4px -1px rgba(100, 116, 139, 0.06);
-    }
-
-    .btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.1), 0 3px 6px -1px rgba(0, 0, 0, 0.06);
-    }
-
-    .form-control {
-        border: 1px solid #e5e7eb;
-        padding: 0.5rem 1rem;
-        transition: all 0.3s ease;
-    }
-
-    .form-control:focus {
-        border-color: #2563eb;
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        outline: none;
-    }
-</style>
 @endsection
