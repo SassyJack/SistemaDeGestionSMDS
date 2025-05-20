@@ -14,6 +14,7 @@
             'Tipo Rubros' => [],
             'Sectores' => [],
             'Seguimiento Proyectos' => [],
+            'Personas' => [],
             'Usuarios' => [],
             'Historial Cambios' => [],
             'Formas de Pago' => [],
