@@ -7,6 +7,7 @@ use App\Http\Controllers\TipoRubroController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\EspecialidadController;
+use App\Http\Controllers\LineaBaseController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,10 +51,12 @@ Route::get('/especialidades/create', [EspecialidadController::class, 'create'])-
 Route::post('/especialidades', [EspecialidadController::class, 'store'])->name('especialidades.store');
 Route::get('/especialidades/{especialidad}/edit', [EspecialidadController::class, 'edit'])->name('especialidades.edit');
 Route::put('/especialidades/{especialidad}', [EspecialidadController::class, 'update'])->name('especialidades.update');
-
-
-
-
+//Lineas Base
+Route::get('/lineas_base', [LineaBaseController::class, 'index'])->name('lineas_base.index');
+Route::get('/lineas_base/create', [LineaBaseController::class, 'create'])->name('lineas_base.create');
+Route::post('/lineas_base', [LineaBaseController::class, 'store'])->name('lineas_base.store');
+Route::get('/lineas_base/{lineaBase}/edit', [LineaBaseController::class, 'edit'])->name('lineas_base.edit');
+Route::put('/lineas_base/{lineaBase}', [LineaBaseController::class, 'update'])->name('lineas_base.update');
 // Rutas protegidas
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
