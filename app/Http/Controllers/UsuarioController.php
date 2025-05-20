@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
-use App\Models\Role;
 use App\Models\Estado;
+use App\Models\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,23 +12,22 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $usuarios = Usuario::with(['rol', 'estado'])->get();
+        $usuarios = Usuario::with(['estado', 'persona'])->get();
         return view('usuarios.index', compact('usuarios'));
     }
 
     public function create()
     {
-        $roles = Role::all();
         $estados = Estado::all();
-        return view('usuarios.create', compact('roles', 'estados'));
+        $personas = Persona::all();
+        return view('usuarios.create', compact('estados', 'personas'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|string|max:100|unique:usuarios',
+            'id_persona' => 'required|exists:personas,id_persona|unique:usuarios,id_persona',
             'contrasena' => 'required|string|min:6',
-            'id_rol' => 'required|exists:roles,id_rol',
             'id_estado' => 'required|exists:estados,id_estado'
         ]);
 
@@ -42,16 +41,15 @@ class UsuarioController extends Controller
 
     public function edit(Usuario $usuario)
     {
-        $roles = Role::all();
         $estados = Estado::all();
-        return view('usuarios.edit', compact('usuario', 'roles', 'estados'));
+        $personas = Persona::all();
+        return view('usuarios.edit', compact('usuario', 'estados', 'personas'));
     }
 
     public function update(Request $request, Usuario $usuario)
     {
         $request->validate([
-            'nombre' => 'required|string|max:100|unique:usuarios,nombre,'.$usuario->id_usuario.',id_usuario',
-            'id_rol' => 'required|exists:roles,id_rol',
+            'id_persona' => 'required|exists:personas,id_persona|unique:usuarios,id_persona,'.$usuario->id_usuario.',id_usuario',
             'id_estado' => 'required|exists:estados,id_estado'
         ]);
 

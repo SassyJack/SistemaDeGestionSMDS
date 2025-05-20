@@ -19,8 +19,7 @@
         <table class="min-w-full">
             <thead class="bg-gray-100">
                 <tr>
-                    <th class="px-6 py-3 text-left">Nombre</th>
-                    <th class="px-6 py-3 text-left">Rol</th>
+                    <th class="px-6 py-3 text-left">Persona</th>
                     <th class="px-6 py-3 text-left">Estado</th>
                     <th class="px-6 py-3 text-left">Fecha de Creación</th>
                     <th class="px-6 py-3 text-left">Acciones</th>
@@ -29,8 +28,7 @@
             <tbody class="divide-y divide-gray-200">
                 @foreach($usuarios as $usuario)
                     <tr>
-                        <td class="px-6 py-4">{{ $usuario->nombre }}</td>
-                        <td class="px-6 py-4">{{ $usuario->rol ? $usuario->rol->nombre : 'Sin rol' }}</td>
+                        <td class="px-6 py-4">{{ $usuario->persona ? $usuario->persona->nombre : 'Sin persona' }}</td>
                         <td class="px-6 py-4">{{ $usuario->estado ? $usuario->estado->nombre : 'Sin estado' }}</td>
                         <td class="px-6 py-4">{{ $usuario->fecha_creacion }}</td>
                         <td class="px-6 py-4">
