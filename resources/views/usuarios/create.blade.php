@@ -8,23 +8,18 @@
         <form action="{{ route('usuarios.store') }}" method="POST" class="space-y-6">
             @csrf
             <div>
-                <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre de Usuario</label>
-                <input type="text" name="nombre" id="nombre" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+                <label for="id_persona" class="block text-sm font-medium text-gray-700">Persona</label>
+                <select name="id_persona" id="id_persona" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+                    <option value="">Seleccione una persona</option>
+                    @foreach($personas as $persona)
+                        <option value="{{ $persona->id_persona }}">{{ $persona->nombre }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div>
                 <label for="contrasena" class="block text-sm font-medium text-gray-700">Contraseña</label>
                 <input type="password" name="contrasena" id="contrasena" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
-            </div>
-
-            <div>
-                <label for="id_rol" class="block text-sm font-medium text-gray-700">Rol</label>
-                <select name="id_rol" id="id_rol" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
-                    <option value="">Seleccione un rol</option>
-                    @foreach($roles as $rol)
-                        <option value="{{ $rol->id_rol }}">{{ $rol->nombre }}</option>
-                    @endforeach
-                </select>
             </div>
 
             <div>
