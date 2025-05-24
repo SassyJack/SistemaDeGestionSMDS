@@ -88,11 +88,11 @@ Route::get('/naturaleza/{naturaleza}/edit', [NaturalezaController::class, 'edit'
 Route::put('/naturaleza/{naturaleza}', [NaturalezaController::class, 'update'])->name('naturaleza.update');
 
 //Formas de Pago
-Route::get('/formas_de_pago', [FormaPagoController::class, 'index'])->name('formas_pago.index');
-Route::get('/formas_de_pago/create', [FormaPagoController::class, 'create'])->name('formas_pago.create');
-Route::post('/formas_de_pago', [FormaPagoController::class, 'store'])->name('formas_pago.store');
-Route::get('/formas_de_pago/{formaPago}/edit', [FormaPagoController::class, 'edit'])->name('formas_pago.edit');
-Route::put('/formas_de_pago/{formaPago}', [FormaPagoController::class, 'update'])->name('formas_pago.update');
+Route::get('/formas_pago', [FormaPagoController::class, 'index'])->name('formas_pago.index');
+Route::get('/formas_pago/create', [FormaPagoController::class, 'create'])->name('formas_pago.create');
+Route::post('/formas_pago', [FormaPagoController::class, 'store'])->name('formas_pago.store');
+Route::get('/formas_pago/{formaPago}/edit', [FormaPagoController::class, 'edit'])->name('formas_pago.edit');
+Route::put('/formas_pago/{formaPago}', [FormaPagoController::class, 'update'])->name('formas_pago.update');
 
 // Rutas protegidas
 Route::middleware(['auth'])->group(function () {

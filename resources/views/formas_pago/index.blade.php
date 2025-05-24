@@ -1,11 +1,13 @@
-@extends('layouts.app')
+@extends('app')
 
 @section('content')
 <div class="container mx-auto px-4 py-6">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold">Formas de Pago</h1>
-        <a href="{{ route('formas_de_pago.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Crear Nueva Forma de Pago
+        <a href="{{ route('formas_pago.create') }}">
+            <x-button>
+                Crear Nueva Forma de Pago
+            </x-button>
         </a>
     </div>
 
@@ -26,7 +28,7 @@
                         <td class="px-6 py-4 border-b">{{ $formaPago->nombre }}</td>
                         <td class="px-6 py-4 border-b">{{ $formaPago->descripcion }}</td>
                         <td class="px-6 py-4 border-b">
-                            <a href="{{ route('formas_de_pago.edit', $formaPago) }}" class="text-blue-500 hover:underline">Editar</a>
+                            <a href="{{ route('formas_pago.edit', $formaPago) }}" class="text-blue-500 hover:underline">Editar</a>
                         </td>
                     </tr>
                 @endforeach
@@ -35,8 +37,3 @@
     </div>
 </div>
 @endsection
-
-// Cambiar todas las ocurrencias de
-route('formas_pago.xxx')
-// por
-route('formas_de_pago.xxx')

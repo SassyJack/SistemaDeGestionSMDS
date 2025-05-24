@@ -5,7 +5,7 @@
     <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-bold mb-6">Editar Forma de Pago</h2>
 
-        <form action="{{ route('formas_de_pago.update', $formaPago) }}" method="POST" class="space-y-6">
+        <form action="{{ route('formas_pago.update', $formaPago) }}" method="POST" class="space-y-6">
             @csrf
             @method('PUT')
 

@@ -10,12 +10,17 @@ class FormaPagoController extends Controller
     public function index()
     {
         $formasPago = FormaPago::all();
-        return view('formas_de_pago.index', compact('formasPago'));
+        return view('formas_pago.index', compact('formasPago'));
     }
 
     public function create()
     {
-        return view('formas_de_pago.create');
+        return view('formas_pago.create');
+    }
+
+    public function edit(FormaPago $formaPago)
+    {
+        return view('formas_pago.edit', compact('formaPago'));
     }
 
     public function store(Request $request)
@@ -26,12 +31,7 @@ class FormaPagoController extends Controller
         ]);
 
         FormaPago::create($request->all());
-        return redirect()->route('formas_de_pago.index')->with('success', 'Forma de Pago creada exitosamente');
-    }
-
-    public function edit(FormaPago $formaPago)
-    {
-        return view('formas_de_pago.edit', compact('formaPago'));
+        return redirect()->route('formas_pago.index')->with('success', 'Forma de Pago creada exitosamente');
     }
 
     public function update(Request $request, FormaPago $formaPago)
@@ -42,6 +42,6 @@ class FormaPagoController extends Controller
         ]);
 
         $formaPago->update($request->all());
-        return redirect()->route('formas_de_pago.index')->with('success', 'Forma de Pago actualizada exitosamente');
+        return redirect()->route('formas_pago.index')->with('success', 'Forma de Pago actualizada exitosamente');
     }
 }
