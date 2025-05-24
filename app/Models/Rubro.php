@@ -9,7 +9,7 @@ class Rubro extends Model
     protected $table = 'rubros';
     protected $primaryKey = 'codigo_rubro';
     protected $keyType = 'integer';
-    public $incrementing = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'codigo_rubro',
@@ -19,6 +19,6 @@ class Rubro extends Model
 
     public function tipoRubro()
     {
-        return $this->belongsTo(TipoRubro::class, 'id_tipo_rubro');
+        return $this->belongsTo(TipoRubro::class, 'id_tipo_rubro', 'id_tipo_rubro');
     }
 }

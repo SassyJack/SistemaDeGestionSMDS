@@ -11,7 +11,7 @@
             
             <div>
                 <label for="codigo_rubro" class="block text-sm font-medium text-gray-700">Código de Rubro</label>
-                <input type="text" name="codigo_rubro" id="codigo_rubro" 
+                <input type="number" name="codigo_rubro" id="codigo_rubro" 
                        value="{{ $rubro->codigo_rubro }}" 
                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" 
                        readonly>
@@ -23,8 +23,8 @@
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
                     <option value="">Seleccione un tipo de rubro</option>
                     @foreach($tipoRubros as $tipoRubro)
-                        <option value="{{ $tipoRubro->id }}" 
-                                {{ $rubro->id_tipo_rubro == $tipoRubro->id ? 'selected' : '' }}>
+                        <option value="{{ $tipoRubro->id_tipo_rubro }}" 
+                                {{ $rubro->id_tipo_rubro == $tipoRubro->id_tipo_rubro ? 'selected' : '' }}>
                             {{ $tipoRubro->nombre }}
                         </option>
                     @endforeach

@@ -24,7 +24,7 @@ class RubroController extends Controller
     {
         $request->validate([
             'codigo_rubro' => 'required|integer|unique:rubros',
-            'id_tipo_rubro' => 'required|exists:tipo_rubros,id',
+            'id_tipo_rubro' => 'required|exists:tipo_rubros,id_tipo_rubro',
             'descripcion' => 'nullable|string'
         ]);
 
@@ -41,7 +41,7 @@ class RubroController extends Controller
     public function update(Request $request, Rubro $rubro)
     {
         $request->validate([
-            'id_tipo_rubro' => 'required|exists:tipo_rubros,id',
+            'id_tipo_rubro' => 'required|exists:tipo_rubros,id_tipo_rubro',
             'descripcion' => 'nullable|string'
         ]);
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\LineaBaseController;
+use App\Http\Controllers\RubroController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -64,7 +65,12 @@ Route::get('/lineas_base/create', [LineaBaseController::class, 'create'])->name(
 Route::post('/lineas_base', [LineaBaseController::class, 'store'])->name('lineas_base.store');
 Route::get('/lineas_base/{lineaBase}/edit', [LineaBaseController::class, 'edit'])->name('lineas_base.edit');
 Route::put('/lineas_base/{lineaBase}', [LineaBaseController::class, 'update'])->name('lineas_base.update');
-
+//Rubros
+Route::get('/rubros', [RubroController::class, 'index'])->name('rubros.index');
+Route::get('/rubros/create', [RubroController::class, 'create'])->name('rubros.create');
+Route::post('/rubros', [RubroController::class, 'store'])->name('rubros.store');
+Route::get('/rubros/{rubro}/edit', [RubroController::class, 'edit'])->name('rubros.edit');
+Route::put('/rubros/{rubro}', [RubroController::class, 'update'])->name('rubros.update');
 
 
 
