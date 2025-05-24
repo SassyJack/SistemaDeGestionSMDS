@@ -19,6 +19,11 @@
             </div>
 
             <div>
+                <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario</label>
+                <input type="text" name="username" id="username" value="{{ old('username', $usuario->username) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+            </div>
+
+            <div>
                 <label for="contrasena" class="block text-sm font-medium text-gray-700">Contraseña (dejar en blanco para mantener la actual)</label>
                 <input type="password" name="contrasena" id="contrasena" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
             </div>
