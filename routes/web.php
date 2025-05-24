@@ -11,6 +11,7 @@ use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\LineaBaseController;
 use App\Http\Controllers\RubroController;
 use App\Http\Controllers\MetaController;
+use App\Http\Controllers\FormaPagoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -78,6 +79,14 @@ Route::get('/metas/create', [MetaController::class, 'create'])->name('metas.crea
 Route::post('/metas', [MetaController::class, 'store'])->name('metas.store');
 Route::get('/metas/{meta}/edit', [MetaController::class, 'edit'])->name('metas.edit');
 Route::put('/metas/{meta}', [MetaController::class, 'update'])->name('metas.update');
+
+//Formas de Pago
+Route::get('/formas_de_pago', [FormaPagoController::class, 'index'])->name('formas_pago.index');
+Route::get('/formas_de_pago/create', [FormaPagoController::class, 'create'])->name('formas_pago.create');
+Route::post('/formas_de_pago', [FormaPagoController::class, 'store'])->name('formas_pago.store');
+Route::get('/formas_de_pago/{formaPago}/edit', [FormaPagoController::class, 'edit'])->name('formas_pago.edit');
+Route::put('/formas_de_pago/{formaPago}', [FormaPagoController::class, 'update'])->name('formas_pago.update');
+
 // Rutas protegidas
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
@@ -86,4 +95,3 @@ Route::middleware(['auth'])->group(function () {
     
     
 });
-
