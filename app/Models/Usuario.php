@@ -11,11 +11,10 @@ class Usuario extends Authenticatable
     public $timestamps = false;
     
     protected $fillable = [
-        'nombre',
+        'id_persona',
         'contrasena',
         'fecha_creacion',
-        'id_estado',
-        'id_rol'
+        'id_estado'
     ];
 
     protected $hidden = [
@@ -27,9 +26,9 @@ class Usuario extends Authenticatable
         return $this->belongsTo(Estado::class, 'id_estado', 'id_estado');
     }
     
-    public function rol()
+    public function persona()
     {
-        return $this->belongsTo(Role::class, 'id_rol', 'id_rol');
+        return $this->belongsTo(Persona::class, 'id_persona', 'id_persona');
     }
 
     public function getAuthPassword()

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Usuario;
+use App\Models\Persona;
 
 class AuthController extends Controller
 {
@@ -16,13 +17,27 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'nombre' => 'required',
+            'persona' => 'required',
             'contrasena' => 'required'
         ]);
 
+        // Buscar el id_persona basado en el nombre de la persona
+        $persona = Persona::where('nombre', $credentials['persona'])->first();
+        
+        if (!$persona) {
+            return back()->with('error', 'Persona no encontrada.');
+        }
+        
+        // Buscar el usuario asociado a esa persona
+        $usuario = Usuario::where('id_persona', $persona->id_persona)->first();
+        
+        if (!$usuario) {
+            return back()->with('error', 'No existe un usuario para esta persona.');
+        }
+        
         if (Auth::attempt([
-            'nombre' => $credentials['nombre'],
-            'password' => $credentials['contrasena']  // Cambia 'contrasena' a 'password' aquí
+            'id_persona' => $persona->id_persona,
+            'password' => $credentials['contrasena']
         ])) {
             $request->session()->regenerate();
             return redirect()->intended('dashboard');

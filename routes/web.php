@@ -6,7 +6,9 @@ use App\Http\Controllers\SectorController;
 use App\Http\Controllers\TipoRubroController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\RubroController;
+use App\Http\Controllers\EspecialidadController;
+use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\LineaBaseController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,12 +46,27 @@ Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usua
 Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
 Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
 Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
-//Rubros
-Route::get('/rubros', [RubroController::class, 'index'])->name('rubros.index');
-Route::get('/rubros/create', [RubroController::class, 'create'])->name('rubros.create');
-Route::post('/rubros', [RubroController::class, 'store'])->name('rubros.store');
-Route::get('/rubros/{rubro}/edit', [RubroController::class, 'edit'])->name('rubros.edit');
-Route::put('/rubros/{rubro}', [RubroController::class, 'update'])->name('rubros.update');
+//Especialidades
+Route::get('/especialidades', [EspecialidadController::class, 'index'])->name('especialidades.index');
+Route::get('/especialidades/create', [EspecialidadController::class, 'create'])->name('especialidades.create');
+Route::post('/especialidades', [EspecialidadController::class, 'store'])->name('especialidades.store');
+Route::get('/especialidades/{especialidad}/edit', [EspecialidadController::class, 'edit'])->name('especialidades.edit');
+Route::put('/especialidades/{especialidad}', [EspecialidadController::class, 'update'])->name('especialidades.update');
+//Personas
+Route::get('/personas', [PersonaController::class, 'index'])->name('personas.index');
+Route::get('/personas/create', [PersonaController::class, 'create'])->name('personas.create');
+Route::post('/personas', [PersonaController::class, 'store'])->name('personas.store');
+Route::get('/personas/{persona}/edit', [PersonaController::class, 'edit'])->name('personas.edit');
+Route::put('/personas/{persona}', [PersonaController::class, 'update'])->name('personas.update');
+//Líneas Base
+Route::get('/lineas_base', [LineaBaseController::class, 'index'])->name('lineas_base.index');
+Route::get('/lineas_base/create', [LineaBaseController::class, 'create'])->name('lineas_base.create');
+Route::post('/lineas_base', [LineaBaseController::class, 'store'])->name('lineas_base.store');
+Route::get('/lineas_base/{lineaBase}/edit', [LineaBaseController::class, 'edit'])->name('lineas_base.edit');
+Route::put('/lineas_base/{lineaBase}', [LineaBaseController::class, 'update'])->name('lineas_base.update');
+
+
+
 
 // Rutas protegidas
 Route::middleware(['auth'])->group(function () {
@@ -59,3 +76,4 @@ Route::middleware(['auth'])->group(function () {
     
     
 });
+
