@@ -11,13 +11,14 @@
                 'Proyectos',
                 'Seguimiento Proyectos',
                 'Metas',
-                'Lineas Base'
+                'Lineas Base',
+                'Naturaleza'
             ],
             'Gestión Financiera' => [
                 'Contratos',
                 'Rubros',
                 'Tipo Rubros',
-                'Formas de Pago'
+                'Formas Pago'
             ],
             'Personal' => [
                 'Contratistas',
