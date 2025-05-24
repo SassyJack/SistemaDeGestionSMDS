@@ -1,60 +1,45 @@
 @extends('app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h4>Listado de Líneas Base</h4>
-                        <a href="{{ route('lineas_base.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Nueva Línea Base
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body">
-                    @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">Líneas Base</h2>
+        <a href="{{ route('lineas_base.create') }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-200 text-black text-sm font-medium rounded-2xl shadow hover:bg-blue-300 transition duration-150 ease-in-out no-underline">
+        Nueva Línea Base
+        </a>
+    </div>
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Descripción</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($lineasBase as $lineaBase)
-                                    <tr>
-                                        <td>{{ $lineaBase->id_linea_base }}</td>
-                                        <td>{{ $lineaBase->nombre }}</td>
-                                        <td>{{ Str::limit($lineaBase->Linea_base, 100) }}</td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <a href="{{ route('lineas_base.edit', $lineaBase->id_linea_base) }}" class="btn btn-warning btn-sm">
-                                                    <i class="fas fa-edit"></i> Editar
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="4" class="text-center">No hay líneas base registradas.</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    @if(session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            {{ session('success') }}
         </div>
+    @endif
+
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <table class="min-w-full">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-6 py-3 text-left">Nombre</th>
+                    <th class="px-6 py-3 text-left">Descripción</th>
+                    <th class="px-6 py-3 text-left">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                @forelse($lineasBase as $lineaBase)
+                    <tr>
+                        <td class="px-6 py-4">{{ $lineaBase->nombre }}</td>
+                        <td class="px-6 py-4">{{ Str::limit($lineaBase->Linea_base, 100) }}</td>
+                        <td class="px-6 py-4">
+                            <a href="{{ route('lineas_base.edit', $lineaBase->id_linea_base) }}" class="text-blue-500 hover:underline">Editar</a>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="3" class="px-6 py-4 text-center">No hay líneas base registradas.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 </div>
 @endsection
