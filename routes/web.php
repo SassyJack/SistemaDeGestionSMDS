@@ -10,6 +10,7 @@ use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\LineaBaseController;
 use App\Http\Controllers\RubroController;
+use App\Http\Controllers\MetaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -71,9 +72,12 @@ Route::get('/rubros/create', [RubroController::class, 'create'])->name('rubros.c
 Route::post('/rubros', [RubroController::class, 'store'])->name('rubros.store');
 Route::get('/rubros/{rubro}/edit', [RubroController::class, 'edit'])->name('rubros.edit');
 Route::put('/rubros/{rubro}', [RubroController::class, 'update'])->name('rubros.update');
-
-
-
+//Metas
+Route::get('/metas', [MetaController::class, 'index'])->name('metas.index');
+Route::get('/metas/create', [MetaController::class, 'create'])->name('metas.create');
+Route::post('/metas', [MetaController::class, 'store'])->name('metas.store');
+Route::get('/metas/{meta}/edit', [MetaController::class, 'edit'])->name('metas.edit');
+Route::put('/metas/{meta}', [MetaController::class, 'update'])->name('metas.update');
 // Rutas protegidas
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
