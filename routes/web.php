@@ -11,6 +11,7 @@ use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\LineaBaseController;
 use App\Http\Controllers\RubroController;
 use App\Http\Controllers\MetaController;
+use App\Http\Controllers\NaturalezaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -78,6 +79,12 @@ Route::get('/metas/create', [MetaController::class, 'create'])->name('metas.crea
 Route::post('/metas', [MetaController::class, 'store'])->name('metas.store');
 Route::get('/metas/{meta}/edit', [MetaController::class, 'edit'])->name('metas.edit');
 Route::put('/metas/{meta}', [MetaController::class, 'update'])->name('metas.update');
+//Naturaleza
+Route::get('/naturaleza', [NaturalezaController::class, 'index'])->name('naturaleza.index');
+Route::get('/naturaleza/create', [NaturalezaController::class, 'create'])->name('naturaleza.create');
+Route::post('/naturaleza', [NaturalezaController::class, 'store'])->name('naturaleza.store');
+Route::get('/naturaleza/{naturaleza}/edit', [NaturalezaController::class, 'edit'])->name('naturaleza.edit');
+Route::put('/naturaleza/{naturaleza}', [NaturalezaController::class, 'update'])->name('naturaleza.update');
 // Rutas protegidas
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
@@ -86,4 +93,3 @@ Route::middleware(['auth'])->group(function () {
     
     
 });
-
