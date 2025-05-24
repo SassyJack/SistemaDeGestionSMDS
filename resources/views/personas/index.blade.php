@@ -4,8 +4,10 @@
 <div class="container mx-auto px-4 py-8">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold">Personas</h2>
-        <a href="{{ route('personas.create') }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-200 text-black text-sm font-medium rounded-2xl shadow hover:bg-blue-300 transition duration-150 ease-in-out no-underline">
-        Nueva Persona
+        <a href="{{ route('personas.create') }}">
+            <x-button>
+                Nueva Persona
+            </x-button>
         </a>
     </div>
 

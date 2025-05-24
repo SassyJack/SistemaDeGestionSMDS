@@ -28,9 +28,14 @@
             </div>
             
             <div class="flex justify-end">
-                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                <a href="{{ route('especialidades.index') }}">
+                    <x-button>
+                        Cancelar
+                    </x-button>
+                </a>
+                <x-button type="submit">
                     Actualizar
-                </button>
+                </x-button>
             </div>
         </form>
     </div>

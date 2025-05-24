@@ -20,10 +20,15 @@
             </div>
 
             <div class="flex justify-end space-x-4">
-                <a href="{{ route('tipo_rubros.index') }}" class="bg-gray-500 text-black px-4 py-2 rounded hover:bg-gray-600">Cancelar</a>
-                <button type="submit"
-                        class="bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700 hover:text-white border-2 border-blue-700 shadow-md transition duration-300 ease-in-out hover:shadow-lg">
-                    Actualizar
+                <a href="{{ route('tipo_rubros.index') }}">
+                    <x-button>
+                        Cancelar
+                    </x-button>
+                </a>
+                <button type="submit">
+                    <x-button>
+                        Actualizar
+                    </x-button>
                 </button>
             </div>
         </form>
