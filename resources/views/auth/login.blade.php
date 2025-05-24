@@ -19,8 +19,8 @@
                         <form method="POST" action="{{ route('login.authenticate') }}">
                             @csrf
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">Usuario</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                <label for="username" class="form-label">Nombre de Usuario</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="contrasena" class="form-label">Contraseña</label>

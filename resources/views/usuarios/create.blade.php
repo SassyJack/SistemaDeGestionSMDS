@@ -15,6 +15,14 @@
                         <option value="{{ $persona->id_persona }}">{{ $persona->nombre }}</option>
                     @endforeach
                 </select>
+                @error('id_persona')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario</label>
+                <input type="text" name="username" id="username" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
             </div>
 
             <div>
