@@ -34,12 +34,14 @@
             </div>
             
             <div class="flex justify-end">
-                <a href="{{ route('personas.index') }}" class="px-4 py-2 bg-gray-300 text-black rounded-md mr-2 hover:bg-gray-400">
-                    Cancelar
+                <a href="{{ route('personas.index') }}">
+                    <x-button>
+                        Cancelar
+                    </x-button>
                 </a>
-                <button type="submit" class="px-4 py-2 bg-blue-500 text-black rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                <x-button type="submit">
                     Guardar
-                </button>
+                </x-button>
             </div>
         </form>
     </div>

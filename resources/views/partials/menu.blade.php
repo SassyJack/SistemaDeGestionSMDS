@@ -68,8 +68,8 @@
     <div class="border-top my-3"></div>
     <form action="{{ route('logout') }}" method="POST" class="px-3">
         @csrf
-        <button type="submit" class="btn btn-outline-danger w-100">
+        <x-button type="submit" class="w-100 bg-red-500 hover:bg-red-600">
             Cerrar Sesión
-        </button>
+        </x-button>
     </form>
 </div>

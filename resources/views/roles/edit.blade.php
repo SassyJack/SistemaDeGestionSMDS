@@ -18,15 +18,15 @@
                 <textarea name="descripcion" id="descripcion" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">{{ $role->descripcion }}</textarea>
             </div>
 
-            <div class="flex justify-end space-x-4 bg-white p-4">
-                <a href="{{ route('roles.index') }}"
-                   class="bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700 hover:text-white border-2 border-blue-700 shadow-md transition duration-300 ease-in-out hover:shadow-lg">
-                    Cancelar
+            <div class="flex justify-end space-x-4">
+                <a href="{{ route('roles.index') }}">
+                    <x-button>
+                        Cancelar
+                    </x-button>
                 </a>
-                <button type="submit"
-                        class="bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700 hover:text-white border-2 border-blue-700 shadow-md transition duration-300 ease-in-out hover:shadow-lg">
+                <x-button type="submit">
                     Actualizar
-                </button>
+                </x-button>
             </div>
         </form>
     </div>
