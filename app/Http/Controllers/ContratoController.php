@@ -11,10 +11,37 @@ use Illuminate\Http\Request;
 
 class ContratoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $contratos = Contrato::with(['contratista', 'proyecto', 'formaPago', 'estado'])->get();
-        return view('contratos.index', compact('contratos'));
+        $query = Contrato::with(['contratista', 'proyecto', 'formaPago', 'estado']);
+        
+        // Filtro por contratista
+        if ($request->filled('id_contratista')) {
+            $query->where('id_contratista', $request->id_contratista);
+        }
+        
+        // Filtro por fecha de celebración
+        if ($request->filled('fecha_celebracion_desde')) {
+            $query->where('fecha_celebracion', '>=', $request->fecha_celebracion_desde);
+        }
+        
+        if ($request->filled('fecha_celebracion_hasta')) {
+            $query->where('fecha_celebracion', '<=', $request->fecha_celebracion_hasta);
+        }
+        
+        // Filtro por fecha de expedición
+        if ($request->filled('fecha_expedicion_desde')) {
+            $query->where('fecha_expedicion', '>=', $request->fecha_expedicion_desde);
+        }
+        
+        if ($request->filled('fecha_expedicion_hasta')) {
+            $query->where('fecha_expedicion', '<=', $request->fecha_expedicion_hasta);
+        }
+        
+        $contratos = $query->get();
+        $contratistas = Contratista::all(); // Añadimos esta línea para obtener todos los contratistas
+        
+        return view('contratos.index', compact('contratos', 'contratistas')); // Pasamos ambas variables a la vista
     }
 
     public function create()
