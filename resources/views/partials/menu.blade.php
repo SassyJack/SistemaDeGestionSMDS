@@ -54,9 +54,15 @@
                                     <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $item))).'/create' }}">
                                         ➕ Crear
                                     </a>
+                                    @if($item != 'Historial Cambios')
                                     <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $item))) }}">
                                         ✏️ Listar/Editar
                                     </a>
+                                    @else
+                                    <a class="nav-link" href="{{ url(strtolower(str_replace(' ', '_', $item))) }}">
+                                        📋 Ver Historial
+                                    </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
