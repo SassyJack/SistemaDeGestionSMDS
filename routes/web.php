@@ -15,6 +15,7 @@ use App\Http\Controllers\NaturalezaController;
 use App\Http\Controllers\FormaPagoController;
 use App\Http\Controllers\ContratistaController;
 use App\Http\Controllers\ProyectoController;
+use App\Http\Controllers\ContratoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -106,6 +107,12 @@ Route::get('/proyectos/create', [ProyectoController::class, 'create'])->name('pr
 Route::post('/proyectos', [ProyectoController::class, 'store'])->name('proyectos.store');
 Route::get('/proyectos/{proyecto}/edit', [ProyectoController::class, 'edit'])->name('proyectos.edit');
 Route::put('/proyectos/{proyecto}', [ProyectoController::class, 'update'])->name('proyectos.update');
+//Contratos
+Route::get('/contratos', [ContratoController::class, 'index'])->name('contratos.index');
+Route::get('/contratos/create', [ContratoController::class, 'create'])->name('contratos.create');
+Route::post('/contratos', [ContratoController::class, 'store'])->name('contratos.store');
+Route::get('/contratos/{contrato}/edit', [ContratoController::class, 'edit'])->name('contratos.edit');
+Route::put('/contratos/{contrato}', [ContratoController::class, 'update'])->name('contratos.update');
 // Rutas protegidas
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
