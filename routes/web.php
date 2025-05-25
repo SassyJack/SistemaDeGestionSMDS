@@ -17,7 +17,8 @@ use App\Http\Controllers\ContratistaController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\ContratoController;
 use App\Http\Controllers\InterventorController;
-
+use App\Http\Controllers\HistorialCambioController;
+use App\Http\Controllers\SeguimientoProyectoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -115,18 +116,20 @@ Route::get('/contratos/create', [ContratoController::class, 'create'])->name('co
 Route::post('/contratos', [ContratoController::class, 'store'])->name('contratos.store');
 Route::get('/contratos/{contrato}/edit', [ContratoController::class, 'edit'])->name('contratos.edit');
 Route::put('/contratos/{contrato}', [ContratoController::class, 'update'])->name('contratos.update');
-
 // Interventores
 Route::get('/interventores', [InterventorController::class, 'index'])->name('interventores.index');
 Route::get('/interventores/create', [InterventorController::class, 'create'])->name('interventores.create');
 Route::post('/interventores', [InterventorController::class, 'store'])->name('interventores.store');
 Route::get('/interventores/{interventor}/edit', [InterventorController::class, 'edit'])->name('interventores.edit');
 Route::put('/interventores/{interventor}', [InterventorController::class, 'update'])->name('interventores.update');
-Route::get('/proyectos/{proyecto}/edit', [ProyectoController::class, 'edit'])->name('proyectos.edit');
-Route::put('/proyectos/{proyecto}', [ProyectoController::class, 'update'])->name('proyectos.update');
-
 // Rutas para Historial de Cambios
 Route::get('/historial_cambios', [App\Http\Controllers\HistorialCambioController::class, 'index'])->name('historial_cambios.index');
+// Rutas para Seguimiento de Proyectos
+Route::get('/seguimiento_proyectos', [SeguimientoProyectoController::class, 'index'])->name('seguimiento_proyectos.index');
+Route::get('/seguimiento_proyectos/create', [SeguimientoProyectoController::class, 'create'])->name('seguimiento_proyectos.create');
+Route::post('/seguimiento_proyectos', [SeguimientoProyectoController::class, 'store'])->name('seguimiento_proyectos.store');
+Route::get('/seguimiento_proyectos/{seguimientoProyecto}/edit', [SeguimientoProyectoController::class, 'edit'])->name('seguimiento_proyectos.edit');
+Route::put('/seguimiento_proyectos/{seguimientoProyecto}', [SeguimientoProyectoController::class, 'update'])->name('seguimiento_proyectos.update');
 // Rutas protegidas
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
