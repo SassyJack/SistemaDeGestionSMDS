@@ -3,59 +3,94 @@
 @section('content')
 <div class="container mx-auto px-4 sm:px-8 w-full">
     <div class="py-8">
-        <div class="flex justify-between mb-4">
-            <h2 class="text-2xl font-semibold leading-tight">Contratos</h2>
-            <a href="{{ route('contratos.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <div class="flex justify-between mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800">Contratos</h2>
+            <x-button href="{{ route('contratos.create') }}" class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
                 Crear Nuevo Contrato
-            </a>
+            </x-button>
         </div>
         
         <!-- Formulario de Filtros -->
-        <div class="bg-white p-4 mb-6 rounded-lg shadow-md">
-            <h3 class="text-lg font-semibold mb-3">Filtros</h3>
-            <form action="{{ route('contratos.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                    <label for="id_contratista" class="block text-sm font-medium text-gray-700 mb-1">Contratista</label>
-                    <select name="id_contratista" id="id_contratista" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                        <option value="">Todos los contratistas</option>
-                        @foreach($contratistas as $contratista)
-                            <option value="{{ $contratista->id_contratista }}" {{ request('id_contratista') == $contratista->id_contratista ? 'selected' : '' }}>
-                                {{ $contratista->persona->nombre ?? 'N/A' }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Celebración</label>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <input type="date" name="fecha_celebracion_desde" placeholder="Desde" value="{{ request('fecha_celebracion_desde') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+            <div class="border-b border-gray-200 px-6 py-4">
+                <h3 class="text-lg font-medium text-gray-800">Filtros de Búsqueda</h3>
+            </div>
+            <form action="{{ route('contratos.index') }}" method="GET" class="p-6 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label for="id_contratista" class="block text-sm font-medium text-gray-700">Contratista</label>
+                        <select name="id_contratista" id="id_contratista" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                            <option value="">Seleccionar contratista</option>
+                            @foreach($contratistas as $contratista)
+                                <option value="{{ $contratista->id_contratista }}" {{ request('id_contratista') == $contratista->id_contratista ? 'selected' : '' }}>
+                                    {{ $contratista->persona->nombre ?? 'N/A' }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-700">Fecha de Celebración</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-xs text-gray-500">Desde</label>
+                                    <input 
+                                        type="date" 
+                                        name="fecha_celebracion_desde" 
+                                        value="{{ request('fecha_celebracion_desde') }}" 
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500">Hasta</label>
+                                    <input 
+                                        type="date" 
+                                        name="fecha_celebracion_hasta" 
+                                        value="{{ request('fecha_celebracion_hasta') }}" 
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <input type="date" name="fecha_celebracion_hasta" placeholder="Hasta" value="{{ request('fecha_celebracion_hasta') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                        
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-700">Fecha de Expedición</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-xs text-gray-500">Desde</label>
+                                    <input 
+                                        type="date" 
+                                        name="fecha_expedicion_desde" 
+                                        value="{{ request('fecha_expedicion_desde') }}" 
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500">Hasta</label>
+                                    <input 
+                                        type="date" 
+                                        name="fecha_expedicion_hasta" 
+                                        value="{{ request('fecha_expedicion_hasta') }}" 
+                                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Expedición</label>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <input type="date" name="fecha_expedicion_desde" placeholder="Desde" value="{{ request('fecha_expedicion_desde') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                        </div>
-                        <div>
-                            <input type="date" name="fecha_expedicion_hasta" placeholder="Hasta" value="{{ request('fecha_expedicion_hasta') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="md:col-span-3 flex justify-end space-x-3">
-                    <x-button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Filtrar
+                <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+                    <x-button type="submit" class="flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        Aplicar Filtros
                     </x-button>
-                    <x-button tag="a" href="{{ route('contratos.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                        Limpiar
+                    <x-button type="submit" name="clear_filters" value="true" variant="secondary" class="flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        Limpiar Filtros
                     </x-button>
                 </div>
             </form>

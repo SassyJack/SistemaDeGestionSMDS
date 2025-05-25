@@ -13,6 +13,11 @@ class ContratoController extends Controller
 {
     public function index(Request $request)
     {
+        // Si se presiona el botón de limpiar filtros, redirigir sin parámetros
+        if ($request->has('clear_filters')) {
+            return redirect()->route('contratos.index');
+        }
+
         $query = Contrato::with(['contratista', 'proyecto', 'formaPago', 'estado']);
         
         // Filtro por contratista
@@ -20,28 +25,28 @@ class ContratoController extends Controller
             $query->where('id_contratista', $request->id_contratista);
         }
         
-        // Filtro por fecha de celebración
+        // Filtro por rango de fecha de celebración
         if ($request->filled('fecha_celebracion_desde')) {
-            $query->where('fecha_celebracion', '>=', $request->fecha_celebracion_desde);
+            $query->whereDate('fecha_celebracion', '>=', $request->fecha_celebracion_desde);
         }
         
         if ($request->filled('fecha_celebracion_hasta')) {
-            $query->where('fecha_celebracion', '<=', $request->fecha_celebracion_hasta);
+            $query->whereDate('fecha_celebracion', '<=', $request->fecha_celebracion_hasta);
         }
         
-        // Filtro por fecha de expedición
+        // Filtro por rango de fecha de expedición
         if ($request->filled('fecha_expedicion_desde')) {
-            $query->where('fecha_expedicion', '>=', $request->fecha_expedicion_desde);
+            $query->whereDate('fecha_expedicion', '>=', $request->fecha_expedicion_desde);
         }
         
         if ($request->filled('fecha_expedicion_hasta')) {
-            $query->where('fecha_expedicion', '<=', $request->fecha_expedicion_hasta);
+            $query->whereDate('fecha_expedicion', '<=', $request->fecha_expedicion_hasta);
         }
         
         $contratos = $query->get();
-        $contratistas = Contratista::all(); // Añadimos esta línea para obtener todos los contratistas
+        $contratistas = Contratista::all();
         
-        return view('contratos.index', compact('contratos', 'contratistas')); // Pasamos ambas variables a la vista
+        return view('contratos.index', compact('contratos', 'contratistas'));
     }
 
     public function create()
