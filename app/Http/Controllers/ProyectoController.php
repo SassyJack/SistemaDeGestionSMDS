@@ -21,22 +21,18 @@ class ProyectoController extends Controller
             $query->where('id_estado', $request->id_estado);
         }
         
-        // Filtro por fecha de inicio
+        // Filtro por rango de fecha de inicio
         if ($request->filled('fecha_inicio_desde')) {
-            $query->where('fecha_inicio', '>=', $request->fecha_inicio_desde);
+            $query->whereDate('fecha_inicio', '>=', $request->fecha_inicio_desde);
         }
         
         if ($request->filled('fecha_inicio_hasta')) {
-            $query->where('fecha_inicio', '<=', $request->fecha_inicio_hasta);
+            $query->whereDate('fecha_inicio', '<=', $request->fecha_inicio_hasta);
         }
         
-        // Filtro por fecha de fin
-        if ($request->filled('fecha_fin_desde')) {
-            $query->where('fecha_fin', '>=', $request->fecha_fin_desde);
-        }
-        
-        if ($request->filled('fecha_fin_hasta')) {
-            $query->where('fecha_fin', '<=', $request->fecha_fin_hasta);
+        // Si se presiona el botón de limpiar filtros, redirigir sin parámetros
+        if ($request->has('clear_filters')) {
+            return redirect()->route('proyectos.index');
         }
         
         $proyectos = $query->get();
