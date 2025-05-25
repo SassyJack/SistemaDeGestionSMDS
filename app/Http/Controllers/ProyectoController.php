@@ -12,10 +12,37 @@ use Illuminate\Http\Request;
 
 class ProyectoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $proyectos = Proyecto::with(['estado', 'naturaleza', 'sector', 'lineaBase', 'Rubro'])->get();
-        return view('proyectos.index', compact('proyectos'));
+        $query = Proyecto::with(['estado', 'naturaleza', 'sector', 'lineaBase', 'Rubro']);
+        
+        // Filtro por estado
+        if ($request->filled('id_estado')) {
+            $query->where('id_estado', $request->id_estado);
+        }
+        
+        // Filtro por fecha de inicio
+        if ($request->filled('fecha_inicio_desde')) {
+            $query->where('fecha_inicio', '>=', $request->fecha_inicio_desde);
+        }
+        
+        if ($request->filled('fecha_inicio_hasta')) {
+            $query->where('fecha_inicio', '<=', $request->fecha_inicio_hasta);
+        }
+        
+        // Filtro por fecha de fin
+        if ($request->filled('fecha_fin_desde')) {
+            $query->where('fecha_fin', '>=', $request->fecha_fin_desde);
+        }
+        
+        if ($request->filled('fecha_fin_hasta')) {
+            $query->where('fecha_fin', '<=', $request->fecha_fin_hasta);
+        }
+        
+        $proyectos = $query->get();
+        $estados = Estado::all();
+        
+        return view('proyectos.index', compact('proyectos', 'estados'));
     }
 
     public function create()
