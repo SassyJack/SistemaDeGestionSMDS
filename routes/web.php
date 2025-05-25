@@ -15,6 +15,7 @@ use App\Http\Controllers\NaturalezaController;
 use App\Http\Controllers\FormaPagoController;
 use App\Http\Controllers\ContratistaController;
 use App\Http\Controllers\ProyectoController;
+use App\Http\Controllers\InterventorController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -104,6 +105,14 @@ Route::put('/contratistas/{contratista}', [ContratistaController::class, 'update
 Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyectos.index');
 Route::get('/proyectos/create', [ProyectoController::class, 'create'])->name('proyectos.create');
 Route::post('/proyectos', [ProyectoController::class, 'store'])->name('proyectos.store');
+Route::get('/proyectos/{proyecto}/edit', [ProyectoController::class, 'edit'])->name('proyectos.edit');
+Route::put('/proyectos/{proyecto}', [ProyectoController::class, 'update'])->name('proyectos.update');
+// Interventores
+Route::get('/interventores', [InterventorController::class, 'index'])->name('interventores.index');
+Route::get('/interventores/create', [InterventorController::class, 'create'])->name('interventores.create');
+Route::post('/interventores', [InterventorController::class, 'store'])->name('interventores.store');
+Route::get('/interventores/{interventor}/edit', [InterventorController::class, 'edit'])->name('interventores.edit');
+Route::put('/interventores/{interventor}', [InterventorController::class, 'update'])->name('interventores.update');
 Route::get('/proyectos/{proyecto}/edit', [ProyectoController::class, 'edit'])->name('proyectos.edit');
 Route::put('/proyectos/{proyecto}', [ProyectoController::class, 'update'])->name('proyectos.update');
 // Rutas protegidas
