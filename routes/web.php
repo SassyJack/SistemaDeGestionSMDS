@@ -106,6 +106,8 @@ Route::get('/proyectos/create', [ProyectoController::class, 'create'])->name('pr
 Route::post('/proyectos', [ProyectoController::class, 'store'])->name('proyectos.store');
 Route::get('/proyectos/{proyecto}/edit', [ProyectoController::class, 'edit'])->name('proyectos.edit');
 Route::put('/proyectos/{proyecto}', [ProyectoController::class, 'update'])->name('proyectos.update');
+// Rutas para Historial de Cambios
+Route::get('/historial_cambios', [App\Http\Controllers\HistorialCambioController::class, 'index'])->name('historial_cambios.index');
 // Rutas protegidas
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
