@@ -15,6 +15,9 @@ use App\Http\Controllers\NaturalezaController;
 use App\Http\Controllers\FormaPagoController;
 use App\Http\Controllers\ContratistaController;
 use App\Http\Controllers\ProyectoController;
+use App\Http\Controllers\ContratoController;
+use App\Http\Controllers\InterventorController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -106,6 +109,22 @@ Route::get('/proyectos/create', [ProyectoController::class, 'create'])->name('pr
 Route::post('/proyectos', [ProyectoController::class, 'store'])->name('proyectos.store');
 Route::get('/proyectos/{proyecto}/edit', [ProyectoController::class, 'edit'])->name('proyectos.edit');
 Route::put('/proyectos/{proyecto}', [ProyectoController::class, 'update'])->name('proyectos.update');
+//Contratos
+Route::get('/contratos', [ContratoController::class, 'index'])->name('contratos.index');
+Route::get('/contratos/create', [ContratoController::class, 'create'])->name('contratos.create');
+Route::post('/contratos', [ContratoController::class, 'store'])->name('contratos.store');
+Route::get('/contratos/{contrato}/edit', [ContratoController::class, 'edit'])->name('contratos.edit');
+Route::put('/contratos/{contrato}', [ContratoController::class, 'update'])->name('contratos.update');
+
+// Interventores
+Route::get('/interventores', [InterventorController::class, 'index'])->name('interventores.index');
+Route::get('/interventores/create', [InterventorController::class, 'create'])->name('interventores.create');
+Route::post('/interventores', [InterventorController::class, 'store'])->name('interventores.store');
+Route::get('/interventores/{interventor}/edit', [InterventorController::class, 'edit'])->name('interventores.edit');
+Route::put('/interventores/{interventor}', [InterventorController::class, 'update'])->name('interventores.update');
+Route::get('/proyectos/{proyecto}/edit', [ProyectoController::class, 'edit'])->name('proyectos.edit');
+Route::put('/proyectos/{proyecto}', [ProyectoController::class, 'update'])->name('proyectos.update');
+
 // Rutas para Historial de Cambios
 Route::get('/historial_cambios', [App\Http\Controllers\HistorialCambioController::class, 'index'])->name('historial_cambios.index');
 // Rutas protegidas
