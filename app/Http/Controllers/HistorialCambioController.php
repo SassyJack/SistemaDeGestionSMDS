@@ -19,19 +19,19 @@ class HistorialCambioController extends Controller
         $query = HistorialCambio::with(['proyecto', 'usuario.persona']);
         
         // Filtros opcionales
-        if ($request->has('id_proyecto')) {
+        if ($request->filled('id_proyecto')) {
             $query->where('id_proyecto', $request->id_proyecto);
         }
         
-        if ($request->has('id_usuario')) {
+        if ($request->filled('id_usuario')) {
             $query->where('id_usuario', $request->id_usuario);
         }
         
-        if ($request->has('fecha_desde')) {
+        if ($request->filled('fecha_desde')) {
             $query->whereDate('fecha', '>=', $request->fecha_desde);
         }
         
-        if ($request->has('fecha_hasta')) {
+        if ($request->filled('fecha_hasta')) {
             $query->whereDate('fecha', '<=', $request->fecha_hasta);
         }
         
