@@ -17,21 +17,3 @@ class Rubro extends Model
         'descripcion'
     ];
 }
-
-class TipoRubro extends Model
-{
-    protected $table = 'tipo_rubros';
-    protected $primaryKey = 'id_tipo_rubro';
-    protected $keyType = 'integer';
-    public $timestamps = false;
-
-    protected $fillable = [
-        'id_tipo_rubro',
-        'descripcion'
-    ];
-
-    public function tipoRubro()
-    {
-        return $this->belongsTo(TipoRubro::class, 'id_tipo_rubro', 'id_tipo_rubro');
-    }
-}
