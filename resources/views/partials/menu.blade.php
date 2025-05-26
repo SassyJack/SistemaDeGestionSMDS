@@ -23,7 +23,6 @@
                 'Gestión Financiera' => [
                     'Contratos',
                     'Rubros',
-                    'Tipo Rubros',
                     'Formas Pago'
                 ],
                 'Personal' => [

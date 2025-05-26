@@ -13,13 +13,8 @@
             </div>
 
             <div>
-                <label for="id_tipo_rubro" class="block text-sm font-medium text-gray-700">Tipo de Rubro</label>
-                <select name="id_tipo_rubro" id="id_tipo_rubro" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
-                    <option value="">Seleccione un tipo de rubro</option>
-                    @foreach($tipoRubros as $tipoRubro)
-                        <option value="{{ $tipoRubro->id_tipo_rubro }}">{{ $tipoRubro->nombre }}</option>
-                    @endforeach
-                </select>
+                <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+                <input type="text" name="nombre" id="nombre" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
             </div>
 
             <div>

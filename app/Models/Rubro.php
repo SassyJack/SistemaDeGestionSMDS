@@ -13,12 +13,7 @@ class Rubro extends Model
 
     protected $fillable = [
         'codigo_rubro',
-        'id_tipo_rubro',
+        'nombre',
         'descripcion'
     ];
-
-    public function tipoRubro()
-    {
-        return $this->belongsTo(TipoRubro::class, 'id_tipo_rubro', 'id_tipo_rubro');
-    }
 }
