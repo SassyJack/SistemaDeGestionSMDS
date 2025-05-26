@@ -16,7 +16,9 @@ class ContratistaController extends Controller
 
     public function create()
     {
-        $personas = Persona::all();
+        $personas = Persona::whereHas('rol', function($query) {
+            $query->where('nombre', 'Contratista');
+        })->get();
         return view('contratistas.create', compact('personas'));
     }
 
@@ -34,7 +36,9 @@ class ContratistaController extends Controller
 
     public function edit(Contratista $contratista)
     {
-        $personas = Persona::all();
+        $personas = Persona::whereHas('rol', function($query) {
+            $query->where('nombre', 'Contratista');
+        })->get();
         return view('contratistas.edit', compact('contratista', 'personas'));
     }
 

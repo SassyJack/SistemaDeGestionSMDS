@@ -18,7 +18,9 @@ class InterventorController extends Controller
     public function create()
     {
         $especialidades = Especialidad::all();
-        $personas = Persona::all();
+        $personas = Persona::whereHas('rol', function($query) {
+            $query->where('nombre', 'Interventor');
+        })->get();
         return view('interventores.create', compact('especialidades', 'personas'));
     }
 
@@ -38,7 +40,9 @@ class InterventorController extends Controller
     public function edit(Interventor $interventor)
     {
         $especialidades = Especialidad::all();
-        $personas = Persona::all();
+        $personas = Persona::whereHas('rol', function($query) {
+            $query->where('nombre', 'Interventor');
+        })->get();
         return view('interventores.edit', compact('interventor', 'especialidades', 'personas'));
     }
 
