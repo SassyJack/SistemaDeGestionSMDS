@@ -22,7 +22,7 @@
             <thead class="bg-gray-100">
                 <tr>
                     <th class="px-6 py-3 text-left">Código</th>
-                    <th class="px-6 py-3 text-left">Tipo de Rubro</th>
+                    <th class="px-6 py-3 text-left">Nombre</th>
                     <th class="px-6 py-3 text-left">Descripción</th>
                     <th class="px-6 py-3 text-left">Acciones</th>
                 </tr>
@@ -31,7 +31,7 @@
                 @foreach($rubros as $rubro)
                     <tr>
                         <td class="px-6 py-4">{{ $rubro->codigo_rubro }}</td>
-                        <td class="px-6 py-4">{{ $rubro->tipoRubro->nombre }}</td>
+                        <td class="px-6 py-4">{{ $rubro->nombre }}</td>
                         <td class="px-6 py-4">{{ $rubro->descripcion }}</td>
                         <td class="px-6 py-4">
                             <a href="{{ route('rubros.edit', $rubro) }}" class="text-blue-500 hover:underline">Editar</a>

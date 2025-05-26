@@ -13,6 +13,19 @@ class Rubro extends Model
 
     protected $fillable = [
         'codigo_rubro',
+        'nombre',
+        'descripcion'
+    ];
+}
+
+class TipoRubro extends Model
+{
+    protected $table = 'tipo_rubros';
+    protected $primaryKey = 'id_tipo_rubro';
+    protected $keyType = 'integer';
+    public $timestamps = false;
+
+    protected $fillable = [
         'id_tipo_rubro',
         'descripcion'
     ];

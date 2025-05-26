@@ -3,28 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rubro;
-use App\Models\TipoRubro;
 use Illuminate\Http\Request;
 
 class RubroController extends Controller
 {
     public function index()
     {
-        $rubros = Rubro::with('tipoRubro')->get();
+        $rubros = Rubro::all();
         return view('rubros.index', compact('rubros'));
     }
 
     public function create()
     {
-        $tipoRubros = TipoRubro::all();
-        return view('rubros.create', compact('tipoRubros'));
+        return view('rubros.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'codigo_rubro' => 'required|integer|unique:rubros',
-            'id_tipo_rubro' => 'required|exists:tipo_rubros,id_tipo_rubro',
+            'nombre' => 'required|string|max:200',
             'descripcion' => 'nullable|string'
         ]);
 
@@ -34,14 +32,13 @@ class RubroController extends Controller
 
     public function edit(Rubro $rubro)
     {
-        $tipoRubros = TipoRubro::all();
-        return view('rubros.edit', compact('rubro', 'tipoRubros'));
+        return view('rubros.edit', compact('rubro'));
     }
 
     public function update(Request $request, Rubro $rubro)
     {
         $request->validate([
-            'id_tipo_rubro' => 'required|exists:tipo_rubros,id_tipo_rubro',
+            'nombre' => 'required|string|max:200',
             'descripcion' => 'nullable|string'
         ]);
 
