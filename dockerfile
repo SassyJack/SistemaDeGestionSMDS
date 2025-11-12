@@ -1,16 +1,14 @@
-# Imagen base: PHP 8.2 con Apache
+# Imagen base con PHP 8.2 y Apache
 FROM php:8.2-apache
 
-# Habilita mod_rewrite para Laravel
+# Habilitar mod_rewrite (Laravel lo necesita)
 RUN a2enmod rewrite
 
-# Instala dependencias requeridas por los drivers de SQL Server
+# Instalar dependencias del sistema necesarias
 RUN apt-get update && apt-get install -y \
     gnupg2 \
     unixodbc \
     unixodbc-dev \
-    libgssapi-krb5-2 \
-    libssl-dev \
     curl \
     apt-transport-https \
     software-properties-common \
@@ -23,39 +21,41 @@ RUN apt-get update && apt-get install -y \
     zip \
     && rm -rf /var/lib/apt/lists/*
 
-# Agrega el repositorio oficial de Microsoft para Debian 12 (Bookworm)
+# Instalar Microsoft ODBC Driver y extensiones de PHP para SQL Server
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
-    curl https://packages.microsoft.com/config/debian/12/prod.list > /etc/apt/sources.list.d/mssql-release.list
+    curl https://packages.microsoft.com/config/debian/12/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
+    apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18 unixodbc-dev && \
+    pecl install sqlsrv pdo_sqlsrv && \
+    echo "extension=sqlsrv.so" > /usr/local/etc/php/conf.d/sqlsrv.ini && \
+    echo "extension=pdo_sqlsrv.so" > /usr/local/etc/php/conf.d/pdo_sqlsrv.ini && \
+    docker-php-ext-enable sqlsrv pdo_sqlsrv
 
-# Instala ODBC y herramientas de SQL Server
-RUN apt-get update && ACCEPT_EULA=Y apt-get install -y \
-    msodbcsql18 \
-    mssql-tools18 \
-    unixodbc-dev
+# Instalar Composer (desde imagen oficial)
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Instala y habilita los drivers PHP para SQL Server
-RUN pecl install sqlsrv pdo_sqlsrv \
-    && docker-php-ext-enable sqlsrv pdo_sqlsrv
-
-# Copia Composer desde su imagen oficial
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-# Copia el proyecto al contenedor
+# Copiar todos los archivos del proyecto Laravel al contenedor
 COPY . /var/www/html
 
-# Establece el directorio de trabajo
+# Establecer directorio de trabajo
 WORKDIR /var/www/html
 
-# Instala dependencias de Laravel (sin desarrollo)
+# Instalar dependencias de Laravel (sin dev)
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Ajusta permisos para Laravel
+# Ajustar permisos para Laravel
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
 
-# Exponer el puerto 80 (Apache)
+# Configurar Apache para servir desde /public
+RUN echo "<Directory /var/www/html/public>\n\
+    AllowOverride All\n\
+    Require all granted\n\
+</Directory>" > /etc/apache2/conf-available/laravel.conf && \
+    a2enconf laravel
+
+# Exponer el puerto 80
 EXPOSE 80
 
-# Arranca Apache
+# Comando de inicio
 CMD ["apache2-foreground"]
