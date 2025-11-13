@@ -59,7 +59,8 @@ class ProyectoController extends Controller
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date|after:fecha_inicio',
             'presupuesto' => 'required|numeric|min:0',
-            'codigo_SSEPI' => 'required|integer|min:0|max:9223372036854775807',
+            // codigo_ssepi is a varchar, accept strings (alphanumeric). Max length 255 to be safe.
+            'codigo_ssepi' => 'required|string|max:255',
             'id_estado' => 'required|exists:estados,id_estado',
             'id_naturaleza' => 'required|exists:naturaleza,id_naturaleza',
             'codigo_rubro' => 'required|integer',
@@ -89,7 +90,7 @@ class ProyectoController extends Controller
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date|after:fecha_inicio',
             'presupuesto' => 'required|numeric|min:0',
-            'codigo_SSEPI' => 'required|integer|min:0|max:9223372036854775807',
+            'codigo_ssepi' => 'required|string|max:255',
             'id_estado' => 'required|exists:estados,id_estado',
             'id_naturaleza' => 'required|exists:naturaleza,id_naturaleza',
             'codigo_rubro' => 'required|integer',
