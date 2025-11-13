@@ -11,7 +11,7 @@ export default defineConfig({
         tailwindcss(),
     ],
     build: {
-        outDir: 'public/build', // 👈 Laravel busca aquí el manifest.json
+        outDir: 'public/build',   // 👈 Laravel busca aquí
         manifest: true,
         emptyOutDir: true,
     },
