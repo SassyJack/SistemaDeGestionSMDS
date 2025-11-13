@@ -19,6 +19,10 @@ use App\Http\Controllers\InterventorController;
 use App\Http\Controllers\HistorialCambioController;
 use App\Http\Controllers\SeguimientoProyectoController;
 
+// Health check para Railway
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok'], 200);
+});
 // Rutas públicas
 Route::get('/', function () {
     return view('welcome');
