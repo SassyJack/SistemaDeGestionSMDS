@@ -20,7 +20,8 @@
                     </div>
                     <div>
                         <p class="text-xs font-medium text-gray-500">Usuarios</p>
-                        <p class="text-lg font-semibold text-gray-800"><span class="stat-number" data-count="{{ \App\Models\Usuario::count() }}">0</span></p>
+                        @php $countUsuarios = \App\Models\Usuario::count(); @endphp
+                        <p class="text-lg font-semibold text-gray-800"><span class="stat-number" data-count="{{ $countUsuarios }}">{{ $countUsuarios }}</span></p>
                     </div>
                 </div>
             </div>
@@ -35,7 +36,8 @@
                     </div>
                     <div>
                         <p class="text-xs font-medium text-gray-500">Proyectos</p>
-                        <p class="text-lg font-semibold text-gray-800"><span class="stat-number" data-count="{{ \App\Models\Proyecto::count() }}">0</span></p>
+                        @php $countProyectos = \App\Models\Proyecto::count(); @endphp
+                        <p class="text-lg font-semibold text-gray-800"><span class="stat-number" data-count="{{ $countProyectos }}">{{ $countProyectos }}</span></p>
                     </div>
                 </div>
             </div>
@@ -50,7 +52,8 @@
                     </div>
                     <div>
                         <p class="text-xs font-medium text-gray-500">Contratos</p>
-                        <p class="text-lg font-semibold text-gray-800"><span class="stat-number" data-count="{{ \App\Models\Contrato::count() }}">0</span></p>
+                        @php $countContratos = \App\Models\Contrato::count(); @endphp
+                        <p class="text-lg font-semibold text-gray-800"><span class="stat-number" data-count="{{ $countContratos }}">{{ $countContratos }}</span></p>
                     </div>
                 </div>
             </div>
@@ -65,7 +68,8 @@
                     </div>
                     <div>
                         <p class="text-xs font-medium text-gray-500">Metas</p>
-                        <p class="text-lg font-semibold text-gray-800"><span class="stat-number" data-count="{{ \App\Models\Meta::count() }}">0</span></p>
+                        @php $countMetas = \App\Models\Meta::count(); @endphp
+                        <p class="text-lg font-semibold text-gray-800"><span class="stat-number" data-count="{{ $countMetas }}">{{ $countMetas }}</span></p>
                     </div>
                 </div>
             </div>
@@ -86,7 +90,7 @@
         <div class="mb-6">
             <div class="chart-card">
                 <h3 class="text-base font-semibold text-gray-800 mb-3">Proyectos - Últimos 6 meses</h3>
-                <canvas id="projectsChart" height="80"></canvas>
+                <canvas id="projectsChart" height="120"></canvas>
             </div>
         </div>
 
@@ -177,22 +181,24 @@
                 const labels = {!! json_encode($labels) !!};
                 const data = {!! json_encode($data) !!};
                 new Chart(ctx, {
-                    type: 'line',
+                    type: 'bar',
                     data: {
                         labels: labels,
                         datasets: [{
                             label: 'Proyectos',
                             data: data,
-                            borderColor: '#1766f2',
-                            backgroundColor: 'rgba(23,102,242,0.12)',
-                            tension: 0.35,
-                            fill: true,
-                            pointRadius: 3
+                            backgroundColor: 'rgba(23,102,242,0.9)',
+                            borderColor: 'rgba(23,102,242,1)',
+                            borderWidth: 1,
+                            borderRadius: 6
                         }]
                     },
                     options: {
                         plugins: {legend:{display:false}},
-                        scales: {y:{beginAtZero:true,precision:0}}
+                        scales: {
+                            y: {beginAtZero:true,precision:0},
+                            x: {grid:{display:false}}
+                        }
                     }
                 });
             }
