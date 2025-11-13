@@ -75,23 +75,7 @@
             </div>
         </div>
 
-        @php
-            $chartLabels = ['Usuarios', 'Proyectos', 'Contratos', 'Metas'];
-            $chartData = [
-                \App\Models\Usuario::count(),
-                \App\Models\Proyecto::count(),
-                \App\Models\Contrato::count(),
-                \App\Models\Meta::count()
-            ];
-        @endphp
-
-        <!-- Gráfico de Totales -->
-        <div class="mb-6">
-            <div class="chart-card">
-                <h3 class="text-base font-semibold text-gray-800 mb-3">Resumen de Elementos en el Sistema</h3>
-                <canvas id="summaryChart" height="120"></canvas>
-            </div>
-        </div>
+        <!-- (Sección de gráficos eliminada por solicitud) -->
 
         <!-- Sección de Contenido Principal -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -155,7 +139,6 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Animate counters
         document.addEventListener('DOMContentLoaded', function(){
@@ -173,53 +156,6 @@
                     }
                 }, 12);
             });
-
-            // Chart.js summary chart
-            const summaryCtx = document.getElementById('summaryChart');
-            if(summaryCtx){
-                const labels = {!! json_encode($chartLabels) !!};
-                const data = {!! json_encode($chartData) !!};
-                new Chart(summaryCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Total',
-                            data: data,
-                            backgroundColor: [
-                                'rgba(59, 130, 246, 0.9)',    // Azul para Usuarios
-                                'rgba(16, 185, 129, 0.9)',    // Verde para Proyectos
-                                'rgba(139, 92, 246, 0.9)',    // Púrpura para Contratos
-                                'rgba(251, 146, 60, 0.9)'     // Naranja para Metas
-                            ],
-                            borderColor: [
-                                'rgba(59, 130, 246, 1)',
-                                'rgba(16, 185, 129, 1)',
-                                'rgba(139, 92, 246, 1)',
-                                'rgba(251, 146, 60, 1)'
-                            ],
-                            borderWidth: 1,
-                            borderRadius: 6
-                        }]
-                    },
-                    options: {
-                        plugins: {
-                            legend: {display: false},
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.label + ': ' + context.parsed.y;
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {beginAtZero: true, precision: 0},
-                            x: {grid: {display: false}}
-                        }
-                    }
-                });
-            }
         });
     </script>
 @endpush
