@@ -20,7 +20,7 @@
                     </div>
                     <div>
                         <p class="text-xs font-medium text-gray-500">Usuarios</p>
-                        <p class="text-lg font-semibold text-gray-800">{{ \App\Models\Usuario::count() }}</p>
+                        <p class="text-lg font-semibold text-gray-800"><span class="stat-number" data-count="{{ \App\Models\Usuario::count() }}">0</span></p>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     </div>
                     <div>
                         <p class="text-xs font-medium text-gray-500">Proyectos</p>
-                        <p class="text-lg font-semibold text-gray-800">{{ \App\Models\Proyecto::count() }}</p>
+                        <p class="text-lg font-semibold text-gray-800"><span class="stat-number" data-count="{{ \App\Models\Proyecto::count() }}">0</span></p>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     </div>
                     <div>
                         <p class="text-xs font-medium text-gray-500">Contratos</p>
-                        <p class="text-lg font-semibold text-gray-800">{{ \App\Models\Contrato::count() }}</p>
+                        <p class="text-lg font-semibold text-gray-800"><span class="stat-number" data-count="{{ \App\Models\Contrato::count() }}">0</span></p>
                     </div>
                 </div>
             </div>
@@ -65,9 +65,28 @@
                     </div>
                     <div>
                         <p class="text-xs font-medium text-gray-500">Metas</p>
-                        <p class="text-lg font-semibold text-gray-800">{{ \App\Models\Meta::count() }}</p>
+                        <p class="text-lg font-semibold text-gray-800"><span class="stat-number" data-count="{{ \App\Models\Meta::count() }}">0</span></p>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        @php
+            use Carbon\Carbon;
+            $labels = [];
+            $data = [];
+            for ($i = 5; $i >= 0; $i--) {
+                $m = Carbon::now()->subMonths($i);
+                $labels[] = $m->format('M Y');
+                $data[] = \App\Models\Proyecto::whereYear('fecha_inicio', $m->year)->whereMonth('fecha_inicio', $m->month)->count();
+            }
+        @endphp
+
+        <!-- Gráfico de Proyectos (últimos 6 meses) -->
+        <div class="mb-6">
+            <div class="chart-card">
+                <h3 class="text-base font-semibold text-gray-800 mb-3">Proyectos - Últimos 6 meses</h3>
+                <canvas id="projectsChart" height="80"></canvas>
             </div>
         </div>
 
@@ -131,3 +150,52 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Animate counters
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('.stat-number').forEach(function(el){
+                const target = parseInt(el.getAttribute('data-count') || '0', 10);
+                let current = 0;
+                const step = Math.max(1, Math.floor(target / 60));
+                const intv = setInterval(function(){
+                    current += step;
+                    if(current >= target){
+                        el.textContent = target.toString();
+                        clearInterval(intv);
+                    } else {
+                        el.textContent = current.toString();
+                    }
+                }, 12);
+            });
+
+            // Chart.js projects trend
+            const ctx = document.getElementById('projectsChart');
+            if(ctx){
+                const labels = {!! json_encode($labels) !!};
+                const data = {!! json_encode($data) !!};
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Proyectos',
+                            data: data,
+                            borderColor: '#1766f2',
+                            backgroundColor: 'rgba(23,102,242,0.12)',
+                            tension: 0.35,
+                            fill: true,
+                            pointRadius: 3
+                        }]
+                    },
+                    options: {
+                        plugins: {legend:{display:false}},
+                        scales: {y:{beginAtZero:true,precision:0}}
+                    }
+                });
+            }
+        });
+    </script>
+@endpush
