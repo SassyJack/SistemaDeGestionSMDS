@@ -4,6 +4,9 @@ FROM php:8.2-apache
 # Habilitar mod_rewrite (necesario para Laravel)
 RUN a2enmod rewrite
 
+# Evitar el error de "Could not determine server name"
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
 # Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
     git \
@@ -25,25 +28,25 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copiar archivos del proyecto
-COPY . /app
+# Copiar los archivos del proyecto
+COPY . /var/www/html
 
-# Establecer directorio de trabajo
-WORKDIR /app
+# Establecer el directorio de trabajo
+WORKDIR /var/www/html
 
 # Instalar dependencias PHP y JS
 RUN composer install --no-dev --optimize-autoloader --no-interaction && \
     npm install && npm run build
 
-# Ajustar permisos
-RUN chown -R www-data:www-data /app && \
-    chmod -R 755 /app/storage && \
-    chmod -R 755 /app/bootstrap/cache
+# Asignar permisos correctos
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html/storage && \
+    chmod -R 755 /var/www/html/bootstrap/cache
 
-# Configurar Apache para servir desde /app/public
+# Configurar Apache para servir desde /var/www/html/public
 RUN echo "<VirtualHost *:80>\n\
-    DocumentRoot /app/public\n\
-    <Directory /app/public>\n\
+    DocumentRoot /var/www/html/public\n\
+    <Directory /var/www/html/public>\n\
         AllowOverride All\n\
         Require all granted\n\
     </Directory>\n\
@@ -52,5 +55,5 @@ RUN echo "<VirtualHost *:80>\n\
 # Exponer el puerto 80
 EXPOSE 80
 
-# Comando por defecto
+# Comando para iniciar Apache en primer plano
 CMD ["apache2-foreground"]
