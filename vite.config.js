@@ -10,4 +10,9 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+    build: {
+        outDir: 'public/build', // 👈 Laravel busca aquí el manifest.json
+        manifest: true,
+        emptyOutDir: true,
+    },
 });
