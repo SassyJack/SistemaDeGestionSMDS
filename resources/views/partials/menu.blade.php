@@ -6,7 +6,7 @@
            class="btn btn-primary w-full rounded-t-md font-semibold py-3 flex items-center justify-center gap-2"
            style="border-bottom: 1px solid #e5e7eb;"
         >
-            <i class="fas fa-home text-sm"></i>
+            🏠
             Menú Principal
         </a>
 
@@ -51,7 +51,7 @@
                         @click="openCategory = (openCategory === '{{ $catSlug }}') ? null : '{{ $catSlug }}'; openItem = null"
                         class="flex items-center w-full text-left font-semibold text-gray-800 hover:text-blue-600 focus:outline-none focus:text-blue-600 transition duration-200 mb-3"
                     >
-                        <i :class="openCategory === '{{ $catSlug }}' ? 'fas fa-chevron-down' : 'fas fa-chevron-right'" class="mr-3 text-sm"></i>
+                        <span class="mr-3 text-sm" :class="openCategory === '{{ $catSlug }}' ? '▼' : '▶'"></span>
                         <span class="text-lg">{{ $categoria }}</span>
                     </button>
 
@@ -73,7 +73,7 @@
                                     @click="openItem = (openItem === '{{ $itemSlug }}') ? null : '{{ $itemSlug }}'"
                                     class="flex items-center w-full text-left text-gray-600 hover:text-blue-500 focus:outline-none focus:text-blue-500 transition duration-200 mb-2"
                                 >
-                                    <i :class="openItem === '{{ $itemSlug }}' ? 'fas fa-folder-open' : 'fas fa-folder'" class="mr-2 text-sm"></i>
+                                    <span class="mr-2 text-sm" :class="openItem === '{{ $itemSlug }}' ? '📂' : '📁'"></span>
                                     <span class="text-base">{{ $item }}</span>
                                 </button>
 
