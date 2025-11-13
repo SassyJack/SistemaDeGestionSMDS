@@ -4,7 +4,7 @@ FROM php:8.2-apache
 # Habilitar mod_rewrite (necesario para Laravel)
 RUN a2enmod rewrite
 
-# Instalar dependencias del sistema necesarias
+# Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -18,34 +18,32 @@ RUN apt-get update && apt-get install -y \
     gnupg2 \
     && docker-php-ext-install pdo_pgsql pgsql zip bcmath
 
-# Instalar Node.js 18 (para compilar Vite)
+# Instalar Node.js 18 (para compilar con Vite)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copiar el proyecto al contenedor
-COPY . /var/www/html
+# Copiar archivos del proyecto
+COPY . /app
 
-# Establecer el directorio de trabajo
-WORKDIR /var/www/html
+# Establecer directorio de trabajo
+WORKDIR /app
 
-# Instalar dependencias PHP y JS, compilar assets
+# Instalar dependencias PHP y JS
 RUN composer install --no-dev --optimize-autoloader --no-interaction && \
-    npm install && npm run build && \
-    php artisan config:clear && php artisan route:clear && php artisan view:clear
+    npm install && npm run build
 
-# Asignar permisos correctos
-RUN chown -R www-data:www-data /var/www/html && \
-    chmod -R 755 /var/www/html/storage && \
-    chmod -R 755 /var/www/html/bootstrap/cache
+# Ajustar permisos
+RUN chown -R www-data:www-data /app && \
+    chmod -R 755 /app/storage && \
+    chmod -R 755 /app/bootstrap/cache
 
-# Configurar Apache para servir desde /public y definir ServerName
+# Configurar Apache para servir desde /app/public
 RUN echo "<VirtualHost *:80>\n\
-    ServerName localhost\n\
-    DocumentRoot /var/www/html/public\n\
-    <Directory /var/www/html/public>\n\
+    DocumentRoot /app/public\n\
+    <Directory /app/public>\n\
         AllowOverride All\n\
         Require all granted\n\
     </Directory>\n\
@@ -54,5 +52,5 @@ RUN echo "<VirtualHost *:80>\n\
 # Exponer el puerto 80
 EXPOSE 80
 
-# Comando de inicio
+# Comando por defecto
 CMD ["apache2-foreground"]
