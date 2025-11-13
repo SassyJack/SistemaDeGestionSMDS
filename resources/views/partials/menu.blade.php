@@ -6,7 +6,7 @@
            class="btn btn-primary w-full rounded-t-md font-semibold py-3 flex items-center justify-center gap-2"
            style="border-bottom: 1px solid #e5e7eb;"
         >
-            <i class="fas fa-home"></i>
+            <i class="fas fa-home text-sm"></i>
             Menú Principal
         </a>
 

@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Gestión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" integrity="sha512-1P8l5jU4mXf1xqC3X6Vh6wqfQ3Jp2rj0cQmJYkzjvYI0ZKk8lU3QvQ2lZ8O6bR3Jv3pNQ1mOqYx4mCkYQv7xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         #sidebar {
