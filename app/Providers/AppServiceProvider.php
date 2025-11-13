@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Proyecto;
 use App\Observers\ProyectoObserver;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Proyecto::observe(ProyectoObserver::class);
         
+        // Force HTTPS in production (Railway uses HTTPS)
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }
