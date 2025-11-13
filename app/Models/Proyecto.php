@@ -16,13 +16,28 @@ class Proyecto extends Model
         'fecha_inicio',
         'fecha_fin',
         'presupuesto',
-        'codigo_SSEPI',
+        'codigo_ssepi',
         'id_estado',
         'id_naturaleza',
         'codigo_rubro',
         'id_sector',
         'id_linea_base'
     ];
+
+    /**
+     * Accessor & mutator compatibility for code that uses the old attribute name
+     * `codigo_SSEPI` (with uppercase). PostgreSQL column names are lowercase by
+     * default, so we map the legacy attribute to the real column `codigo_ssepi`.
+     */
+    public function setCodigoSSEPIAttribute($value)
+    {
+        $this->attributes['codigo_ssepi'] = $value;
+    }
+
+    public function getCodigoSSEPIAttribute()
+    {
+        return $this->attributes['codigo_ssepi'] ?? null;
+    }
 
     // Relaciones
     public function estado()
