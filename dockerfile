@@ -18,6 +18,11 @@ RUN apt-get update && apt-get install -y \
     gnupg2 \
     && docker-php-ext-install pdo_pgsql pgsql zip bcmath
 
+# Instalar Node.js 18 (para compilar con Vite)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs
+
+
 # Instalar Node.js (para Vite)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
